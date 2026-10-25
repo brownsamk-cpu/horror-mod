@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "horrormod-gametest",
+  "version": "1.0.0",
+  "name": "Horror Mod game tests",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-gametest": [
+      "com.horrormod.test.SpookySpiritGameTest"
+    ],
+    "fabric-client-gametest": [
+      "com.horrormod.test.SpookySpiritScreenshots"
+    ]
+  },
+  "depends": {
+    "horrormod": "*"
+  }
+}

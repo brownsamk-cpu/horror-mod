@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "horrormod",
+	"version": "${version}",
+	"name": "Horror Mod",
+	"description": "Spooky-fun Halloween things, one step at a time. Step 1: the Spooky Spirit, a clear see-through ghost that floats around, says a soft \"wooo\", and never hurts anyone.",
+	"authors": [
+		"Sam Brown",
+		"Sam's daughter"
+	],
+	"contact": {
+		"sources": "https://github.com/brownsamk-cpu/horror-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/horrormod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.horrormod.HorrorMod"
+		],
+		"client": [
+			"com.horrormod.client.HorrorModClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
