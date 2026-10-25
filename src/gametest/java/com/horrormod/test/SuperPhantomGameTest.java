@@ -15,8 +15,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.phys.Vec3;
 
-/** Horror Mod 0.2.0, step 2: the Super Phantom (horrormod:super_phantom). */
+/** Horror Mod 0.3.0, step 2 (now hostile): the Super Phantom (horrormod:super_phantom). */
 public class SuperPhantomGameTest {
 	private static SuperPhantom spawn(GameTestHelper helper) {
 		SuperPhantom p = helper.spawn(ModEntities.SUPER_PHANTOM, new BlockPos(1, 3, 1));
@@ -38,20 +40,22 @@ public class SuperPhantomGameTest {
 		helper.succeed();
 	}
 
-	/** Never does damage. */
-	@GameTest(maxTicks = 80)
+	/** Hostile (0.3.0): a monster that bites a survival player for damage, and targets survival players at night. */
+	@GameTest(maxTicks = 100)
 	@SuppressWarnings("removal")
-	public void superPhantomNoDamage(GameTestHelper helper) {
+	public void superPhantomAttacks(GameTestHelper helper) {
+		helper.getLevel().getServer().setDifficulty(net.minecraft.world.Difficulty.NORMAL, true);
 		SuperPhantom p = spawn(helper);
+		helper.assertTrue(ModEntities.SUPER_PHANTOM.getCategory() == MobCategory.MONSTER, "hostile monster category");
+		helper.assertTrue(p.getAttributeValue(Attributes.ATTACK_DAMAGE) == 2.0, "about 2 hp per bite");
 		Player player = helper.makeMockPlayer(GameType.SURVIVAL);
-		helper.assertTrue(p.getAttribute(Attributes.ATTACK_DAMAGE) == null, "no attack damage");
-		helper.assertFalse(p.doHurtTarget(helper.getLevel(), player), "doHurtTarget does nothing");
+		Vec3 pos = helper.absoluteVec(new Vec3(1.5, 2, 2.5));
+		player.snapTo(pos.x, pos.y, pos.z, 0, 0);
 		float health = player.getHealth();
-		helper.runAfterDelay(40, () -> {
-			helper.assertTrue(player.getHealth() >= health, "player got hurt");
-			helper.assertTrue(p.getTarget() == null, "never targets anyone");
-			helper.succeed();
-		});
+		helper.assertTrue(p.doHurtTarget(helper.getLevel(), player), "bite should land");
+		helper.assertTrue(player.getHealth() < health, "player should take damage");
+		helper.assertTrue(health - player.getHealth() <= 3.0F, "phantom-level damage, took " + (health - player.getHealth()));
+		helper.succeed();
 	}
 
 	/** Snatches exactly ONE item from the main inventory, never armor, and stores it. */

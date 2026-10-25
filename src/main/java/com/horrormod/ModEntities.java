@@ -28,11 +28,11 @@ public final class ModEntities {
 
 	public static final ResourceKey<EntityType<?>> SUPER_PHANTOM_KEY = ResourceKey.create(Registries.ENTITY_TYPE, HorrorMod.id("super_phantom"));
 
-	/** The Super Phantom: a big dark phantom that snatches one little item, never hurts anyone. */
+	/** The Super Phantom: a big dark phantom that attacks at night and snatches one little item (hostile). */
 	public static final EntityType<SuperPhantom> SUPER_PHANTOM = Registry.register(
 			BuiltInRegistries.ENTITY_TYPE,
 			SUPER_PHANTOM_KEY,
-			EntityType.Builder.<SuperPhantom>of(SuperPhantom::new, MobCategory.AMBIENT)
+			EntityType.Builder.<SuperPhantom>of(SuperPhantom::new, MobCategory.MONSTER)
 					.sized(1.6F, 0.8F)
 					.eyeHeight(0.4F)
 					.clientTrackingRange(10)
@@ -48,7 +48,7 @@ public final class ModEntities {
 		BiomeModifications.addSpawn(BiomeSelectors.foundInOverworld(), MobCategory.AMBIENT, SPOOKY_SPIRIT, 2, 1, 1);
 		FabricDefaultAttributeRegistry.register(SUPER_PHANTOM, SuperPhantom.createAttributes());
 		SpawnPlacements.register(SUPER_PHANTOM, SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING, SuperPhantom::checkSuperPhantomSpawnRules);
-		// Very rare: weight 1 plus an extra 1-in-4 check, only at night under the open sky.
-		BiomeModifications.addSpawn(BiomeSelectors.foundInOverworld(), MobCategory.AMBIENT, SUPER_PHANTOM, 1, 1, 1);
+		// Rare: weight 2 among monsters (zombies are 100) plus an extra 1-in-4 check, only at night under the open sky.
+		BiomeModifications.addSpawn(BiomeSelectors.foundInOverworld(), MobCategory.MONSTER, SUPER_PHANTOM, 2, 1, 1);
 	}
 }

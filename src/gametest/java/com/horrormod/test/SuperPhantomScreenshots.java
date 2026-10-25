@@ -63,6 +63,15 @@ public class SuperPhantomScreenshots implements FabricClientGameTest {
 			save(context, "super_phantom_snatch_before", out);
 			context.waitTicks(56);
 			save(context, "super_phantom_snatch_after", out);
+			// attacking (0.3.0, hostile): at night a free-flying one swoops in and bites
+			server.runCommand("kill @e[type=horrormod:super_phantom]");
+			server.runCommand("kill @e[type=item]");
+			server.runCommand("effect clear @a");
+			server.runCommand("time set 18000");
+			server.runCommand("tp @a 0.5 100 0.5 0 -10");
+			server.runCommand("summon horrormod:super_phantom 0.5 104 7 {PersistenceRequired:1b,SnatchCooldown:2000}");
+			context.waitTicks(50);
+			save(context, "super_phantom_attacking", out);
 		}
 	}
 

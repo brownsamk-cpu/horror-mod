@@ -14,11 +14,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -39,12 +41,13 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The Super Phantom (horrormod:super_phantom): "like a phantom, but worse". Bigger and darker than a vanilla phantom,
- * with glowing eyes. It flies and swoops slowly around and NEVER does damage. Its trick: when it swoops within about
+ * with glowing eyes. It is HOSTILE (0.3.0): at night it hunts survival/adventure players, swooping down to bite for
+ * about 2 hp per hit on Normal (vanilla difficulty scaling), and it does not spawn on Peaceful. Its other trick: when it swoops within about
  * 2 blocks of a survival/adventure player it snatches ONE item (count 1) from a random non-empty main-inventory or
  * hotbar slot (never worn armor or the offhand), then waits about 30 seconds before it can snatch again.
  * It keeps everything it stole and drops ALL of it when it dies, so you can get your things back.
  */
-public class SuperPhantom extends PathfinderMob {
+public class SuperPhantom extends Monster {
 	public static final int SNATCH_COOLDOWN = 600; // 30 s
 	public static final double SNATCH_RANGE = 2.0;
 	private final SimpleContainer stolen = new SimpleContainer(27);
@@ -57,8 +60,9 @@ public class SuperPhantom extends PathfinderMob {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes()
+		return Monster.createMonsterAttributes()
 				.add(Attributes.MAX_HEALTH, 20.0)
+				.add(Attributes.ATTACK_DAMAGE, 2.0)
 				.add(Attributes.FLYING_SPEED, 0.25F)
 				.add(Attributes.MOVEMENT_SPEED, 0.12F)
 				.add(Attributes.FOLLOW_RANGE, 16.0);
@@ -67,6 +71,9 @@ public class SuperPhantom extends PathfinderMob {
 	/** Rare, only at night (dark outside), only where it can see the sky. */
 	public static boolean checkSuperPhantomSpawnRules(final EntityType<SuperPhantom> type, final ServerLevelAccessor level, final EntitySpawnReason reason,
 			final BlockPos pos, final RandomSource random) {
+		if (level.getDifficulty() == Difficulty.PEACEFUL) {
+			return false;
+		}
 		if (EntitySpawnReason.isSpawner(reason)) {
 			return true;
 		}
@@ -84,11 +91,14 @@ public class SuperPhantom extends PathfinderMob {
 
 	@Override
 	protected void registerGoals() {
+		this.goalSelector.addGoal(2, new SwoopAttackGoal());
 		this.goalSelector.addGoal(3, new SwoopGoal());
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomFlyingGoal(this, 0.8));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 12.0F));
 		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-		// no target goals: it never attacks anyone
+		// hostile: hunts survival/adventure players, but only at night
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false,
+				(target, level) -> target instanceof Player p && canBeSnatchedFrom(p) && level.isDarkOutside()));
 	}
 
 	@Override
@@ -183,6 +193,17 @@ public class SuperPhantom extends PathfinderMob {
 		}
 	}
 
+	/** Switching to Peaceful removes monsters; give back anything it stole first. */
+	@Override
+	public void checkDespawn() {
+		if (this.level() instanceof ServerLevel level && level.getDifficulty() == Difficulty.PEACEFUL) {
+			for (ItemStack stack : this.stolen.removeAllItems()) {
+				this.spawnAtLocation(level, stack);
+			}
+		}
+		super.checkDespawn();
+	}
+
 	@Override
 	protected void addAdditionalSaveData(final ValueOutput output) {
 		super.addAdditionalSaveData(output);
@@ -218,11 +239,6 @@ public class SuperPhantom extends PathfinderMob {
 	}
 
 	@Override
-	public boolean doHurtTarget(final ServerLevel level, final Entity target) {
-		return false; // never deals damage
-	}
-
-	@Override
 	public boolean causeFallDamage(final double fallDistance, final float damageModifier, final DamageSource damageSource) {
 		return false;
 	}
@@ -230,6 +246,42 @@ public class SuperPhantom extends PathfinderMob {
 	@Override
 	public boolean removeWhenFarAway(final double distSqr) {
 		return !this.hasCustomName() && !this.isPersistenceRequired();
+	}
+
+	/** Swoops down at its target and bites it (about once a second while close). */
+	class SwoopAttackGoal extends Goal {
+		private int attackDelay;
+
+		SwoopAttackGoal() {
+			this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+		}
+
+		@Override
+		public boolean canUse() {
+			LivingEntity t = SuperPhantom.this.getTarget();
+			return t != null && t.isAlive();
+		}
+
+		@Override
+		public void tick() {
+			LivingEntity t = SuperPhantom.this.getTarget();
+			if (t == null) {
+				return;
+			}
+			SuperPhantom.this.getLookControl().setLookAt(t, 30.0F, 30.0F);
+			SuperPhantom.this.getNavigation().moveTo(t.getX(), t.getY() + 0.5, t.getZ(), 1.3);
+			if (this.attackDelay > 0) {
+				this.attackDelay--;
+			} else if (SuperPhantom.this.distanceToSqr(t) < 4.0 && SuperPhantom.this.level() instanceof ServerLevel level) {
+				SuperPhantom.this.doHurtTarget(level, t);
+				this.attackDelay = 20;
+			}
+		}
+
+		@Override
+		public void stop() {
+			SuperPhantom.this.getNavigation().stop();
+		}
 	}
 
 	/** Slowly swoops toward a nearby player when ready to snatch. */
