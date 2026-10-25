@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "horrormod:block/stray_blast_pad"
+    },
+    "facing=east": {
+      "model": "horrormod:block/stray_blast_pad",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "horrormod:block/stray_blast_pad",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "horrormod:block/stray_blast_pad",
+      "y": 270
+    }
+  }
+}

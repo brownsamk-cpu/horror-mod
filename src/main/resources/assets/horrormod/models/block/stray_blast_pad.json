@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "horrormod:block/stray_blast_pad_top",
+    "side": "horrormod:block/stray_blast_pad_side",
+    "bottom": "minecraft:block/deepslate_tiles"
+  }
+}
