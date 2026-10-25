@@ -13,7 +13,8 @@
     "fabric-client-gametest": [
       "com.horrormod.test.SpookySpiritScreenshots",
       "com.horrormod.test.SuperPhantomScreenshots",
-      "com.horrormod.test.MysteriousWitchScreenshots"
+      "com.horrormod.test.MysteriousWitchScreenshots",
+      "com.horrormod.test.SpiritScreenshots"
     ]
   },
   "depends": {

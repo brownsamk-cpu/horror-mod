@@ -20,6 +20,9 @@ public final class ModItems {
 	public static final Item MYSTERIOUS_WITCH_SPAWN_EGG = register("mysterious_witch_spawn_egg",
 			new Item.Properties().spawnEgg(ModEntities.MYSTERIOUS_WITCH));
 
+	/** Dropped by the Ghost when it is defeated: a whitish gray wisp with a little purple sparkle. */
+	public static final Item SPIRIT = registerPlain("spirit", new Item.Properties());
+
 	private ModItems() {
 	}
 
@@ -28,7 +31,13 @@ public final class ModItems {
 		return Registry.register(BuiltInRegistries.ITEM, key, new SpawnEggItem(props.setId(key)));
 	}
 
+	private static Item registerPlain(String name, Item.Properties props) {
+		ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, HorrorMod.id(name));
+		return Registry.register(BuiltInRegistries.ITEM, key, new Item(props.setId(key)));
+	}
+
 	public static void init() {
+		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS).register(output -> output.insertAfter(Items.PHANTOM_MEMBRANE, SPIRIT));
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(output -> output.insertAfter(Items.VEX_SPAWN_EGG, SPOOKY_SPIRIT_SPAWN_EGG));
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(output -> output.insertAfter(Items.PHANTOM_SPAWN_EGG, SUPER_PHANTOM_SPAWN_EGG));
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(output -> output.insertAfter(Items.WITCH_SPAWN_EGG, MYSTERIOUS_WITCH_SPAWN_EGG));

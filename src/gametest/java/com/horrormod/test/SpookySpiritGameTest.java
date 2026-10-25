@@ -95,4 +95,23 @@ public class SpookySpiritGameTest {
 		}
 		helper.succeed();
 	}
+
+	/** 0.5.0: when a Ghost is defeated it drops exactly 1 Spirit. */
+	@GameTest(maxTicks = 60)
+	@SuppressWarnings("removal")
+	public void ghostDropsSpirit(GameTestHelper helper) {
+		SpookySpirit spirit = helper.spawn(ModEntities.SPOOKY_SPIRIT, new BlockPos(1, 2, 1));
+		ServerPlayer player = helper.makeMockServerPlayerInLevel();
+		spirit.hurtServer(helper.getLevel(), helper.getLevel().damageSources().playerAttack(player), 1000.0F);
+		helper.succeedWhen(() -> {
+			int count = 0;
+			for (net.minecraft.world.entity.item.ItemEntity e : helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
+					new net.minecraft.world.phys.AABB(helper.absolutePos(new BlockPos(1, 2, 1))).inflate(4))) {
+				if (e.getItem().is(ModItems.SPIRIT)) {
+					count += e.getItem().getCount();
+				}
+			}
+			helper.assertTrue(count == 1, "expected 1 Spirit dropped, got " + count);
+		});
+	}
 }
