@@ -4,5 +4,11 @@
     "sounds": [
       "horrormod:entity/spooky_spirit_wooo"
     ]
+  },
+  "entity.super_phantom.snatch": {
+    "subtitle": "subtitles.horrormod.super_phantom.snatch",
+    "sounds": [
+      "horrormod:entity/super_phantom_snatch"
+    ]
   }
 }

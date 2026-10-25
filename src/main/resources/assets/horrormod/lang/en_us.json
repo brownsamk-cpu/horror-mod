@@ -1,5 +1,8 @@
 {
  "entity.horrormod.spooky_spirit": "Ghost",
  "item.horrormod.spooky_spirit_spawn_egg": "Ghost Spawn Egg",
- "subtitles.horrormod.spooky_spirit.wooo": "Ghost goes wooo"
+ "subtitles.horrormod.spooky_spirit.wooo": "Ghost goes wooo",
+ "entity.horrormod.super_phantom": "Super Phantom",
+ "item.horrormod.super_phantom_spawn_egg": "Super Phantom Spawn Egg",
+ "subtitles.horrormod.super_phantom.snatch": "Super Phantom snatches an item"
 }

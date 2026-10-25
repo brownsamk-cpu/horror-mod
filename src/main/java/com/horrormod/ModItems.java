@@ -14,6 +14,9 @@ public final class ModItems {
 	public static final Item SPOOKY_SPIRIT_SPAWN_EGG = register("spooky_spirit_spawn_egg",
 			new Item.Properties().spawnEgg(ModEntities.SPOOKY_SPIRIT));
 
+	public static final Item SUPER_PHANTOM_SPAWN_EGG = register("super_phantom_spawn_egg",
+			new Item.Properties().spawnEgg(ModEntities.SUPER_PHANTOM));
+
 	private ModItems() {
 	}
 
@@ -24,5 +27,6 @@ public final class ModItems {
 
 	public static void init() {
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(output -> output.insertAfter(Items.VEX_SPAWN_EGG, SPOOKY_SPIRIT_SPAWN_EGG));
+		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(output -> output.insertAfter(Items.PHANTOM_SPAWN_EGG, SUPER_PHANTOM_SPAWN_EGG));
 	}
 }

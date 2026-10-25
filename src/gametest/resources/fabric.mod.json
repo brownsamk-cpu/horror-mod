@@ -6,10 +6,12 @@
   "environment": "*",
   "entrypoints": {
     "fabric-gametest": [
-      "com.horrormod.test.SpookySpiritGameTest"
+      "com.horrormod.test.SpookySpiritGameTest",
+      "com.horrormod.test.SuperPhantomGameTest"
     ],
     "fabric-client-gametest": [
-      "com.horrormod.test.SpookySpiritScreenshots"
+      "com.horrormod.test.SpookySpiritScreenshots",
+      "com.horrormod.test.SuperPhantomScreenshots"
     ]
   },
   "depends": {

@@ -10,5 +10,7 @@ public class HorrorModClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		ModelLayerRegistry.registerModelLayer(SpookySpiritModel.LAYER, SpookySpiritModel::createBodyLayer);
 		EntityRendererRegistry.register(ModEntities.SPOOKY_SPIRIT, SpookySpiritRenderer::new);
+		ModelLayerRegistry.registerModelLayer(SuperPhantomModel.LAYER, SuperPhantomModel::createBodyLayer);
+		EntityRendererRegistry.register(ModEntities.SUPER_PHANTOM, SuperPhantomRenderer::new);
 	}
 }
