@@ -26,7 +26,7 @@ public class SpookySpiritGameTest {
 	public void spookySpiritSpawns(GameTestHelper helper) {
 		SpookySpirit spirit = helper.spawn(ModEntities.SPOOKY_SPIRIT, new BlockPos(1, 2, 1));
 		helper.assertTrue(spirit.isAlive() && spirit.getType() == ModEntities.SPOOKY_SPIRIT, "spirit should spawn");
-		helper.assertTrue(spirit.getType().getDescription().getString().equals("Spooky Spirit")
+		helper.assertTrue(spirit.getType().getDescription().getString().equals("Ghost")
 				|| spirit.getType().getDescriptionId().equals("entity.horrormod.spooky_spirit"), "display name");
 		helper.assertTrue(ModItems.SPOOKY_SPIRIT_SPAWN_EGG instanceof SpawnEggItem, "spawn egg");
 		helper.assertTrue(ModEntities.SPOOKY_SPIRIT.getCategory() == MobCategory.AMBIENT, "ambient category");

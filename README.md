@@ -2,10 +2,10 @@
 
 A spooky-fun (Halloween, not scary) Fabric mod for Minecraft 26.3, built one step at a time.
 
-## Step 1: the Spooky Spirit
+## Step 1: the Ghost (first called the Spooky Spirit)
 - `horrormod:spooky_spirit`: a small, **clear, see-through** ghost.
 - It floats slowly, drifts around, bobs up and down, and looks at you.
-- Now and then it says a soft "wooo" (subtitle: "Spooky Spirit goes wooo").
+- Now and then it says a soft "wooo" (subtitle: "Ghost goes wooo").
 - It is passive: it never attacks or hurts anyone.
 - It has a spawn egg and spawns rarely, only in the dark (at night or in caves).
 
