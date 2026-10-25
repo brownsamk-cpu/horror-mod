@@ -124,6 +124,7 @@ public class CastleLevelSixGameTest {
 		Vec3 waiting = helper.absoluteVec(new Vec3(1.5, 2, 3.5)); // off the pad while waiting
 		player.snapTo(waiting.x, waiting.y, waiting.z, 0, 0);
 		Stray stray = helper.spawn(EntityTypes.STRAY, new BlockPos(6, 2, 0));
+		stray.setNoAi(true); // it's only the arrow's owner here; a real shooting stray could hit other tests
 		// new players can't be hurt for their first 3 seconds, so wait that out first
 		helper.runAfterDelay(65, () -> {
 			player.snapTo(start.x, start.y, start.z, 0, 0);
