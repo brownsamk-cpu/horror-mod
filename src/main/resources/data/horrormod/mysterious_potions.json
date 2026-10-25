@@ -1,0 +1,30 @@
+[
+ {
+  "id": "bouncy",
+  "name": "Bouncy Potion",
+  "effect": "Bouncy",
+  "color": "#4FD8FF",
+  "duration": 600
+ },
+ {
+  "id": "glow",
+  "name": "Glow Potion",
+  "effect": "Glowy",
+  "color": "#FFE45C",
+  "duration": 600
+ },
+ {
+  "id": "bat",
+  "name": "Bat Potion",
+  "effect": "Bat Swarm",
+  "color": "#6B3FA0",
+  "duration": 400
+ },
+ {
+  "id": "slime_feet",
+  "name": "Slime Feet Potion",
+  "effect": "Slime Feet",
+  "color": "#7CE05A",
+  "duration": 600
+ }
+]

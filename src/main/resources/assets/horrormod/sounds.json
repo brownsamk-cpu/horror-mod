@@ -10,5 +10,11 @@
     "sounds": [
       "horrormod:entity/super_phantom_snatch"
     ]
+  },
+  "entity.mysterious_witch.cackle": {
+    "subtitle": "subtitles.horrormod.mysterious_witch.cackle",
+    "sounds": [
+      "horrormod:entity/mysterious_witch_cackle"
+    ]
   }
 }

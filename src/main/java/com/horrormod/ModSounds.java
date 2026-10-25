@@ -10,6 +10,9 @@ public final class ModSounds {
 	/** The Super Phantom's whoosh when it snatches an item (synthesized by tools/super_phantom.py). */
 	public static final SoundEvent SUPER_PHANTOM_SNATCH = register("entity.super_phantom.snatch");
 
+	/** The Mysterious Witch's cackle (synthesized by tools/mysterious_witch.py). */
+	public static final SoundEvent MYSTERIOUS_WITCH_CACKLE = register("entity.mysterious_witch.cackle");
+
 	private ModSounds() {
 	}
 

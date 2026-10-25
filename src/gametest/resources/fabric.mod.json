@@ -7,11 +7,13 @@
   "entrypoints": {
     "fabric-gametest": [
       "com.horrormod.test.SpookySpiritGameTest",
-      "com.horrormod.test.SuperPhantomGameTest"
+      "com.horrormod.test.SuperPhantomGameTest",
+      "com.horrormod.test.MysteriousWitchGameTest"
     ],
     "fabric-client-gametest": [
       "com.horrormod.test.SpookySpiritScreenshots",
-      "com.horrormod.test.SuperPhantomScreenshots"
+      "com.horrormod.test.SuperPhantomScreenshots",
+      "com.horrormod.test.MysteriousWitchScreenshots"
     ]
   },
   "depends": {

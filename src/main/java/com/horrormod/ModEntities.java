@@ -11,6 +11,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 public final class ModEntities {
@@ -38,6 +39,18 @@ public final class ModEntities {
 					.clientTrackingRange(10)
 					.build(SUPER_PHANTOM_KEY));
 
+	public static final ResourceKey<EntityType<?>> MYSTERIOUS_WITCH_KEY = ResourceKey.create(Registries.ENTITY_TYPE, HorrorMod.id("mysterious_witch"));
+
+	/** The Mysterious Witch: neutral, throws her own mod potions only at whoever hits her. */
+	public static final EntityType<MysteriousWitch> MYSTERIOUS_WITCH = Registry.register(
+			BuiltInRegistries.ENTITY_TYPE,
+			MYSTERIOUS_WITCH_KEY,
+			EntityType.Builder.<MysteriousWitch>of(MysteriousWitch::new, MobCategory.MONSTER)
+					.sized(0.6F, 1.95F)
+					.eyeHeight(1.62F)
+					.clientTrackingRange(8)
+					.build(MYSTERIOUS_WITCH_KEY));
+
 	private ModEntities() {
 	}
 
@@ -50,5 +63,10 @@ public final class ModEntities {
 		SpawnPlacements.register(SUPER_PHANTOM, SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING, SuperPhantom::checkSuperPhantomSpawnRules);
 		// Rare: weight 2 among monsters (zombies are 100) plus an extra 1-in-4 check, only at night under the open sky.
 		BiomeModifications.addSpawn(BiomeSelectors.foundInOverworld(), MobCategory.MONSTER, SUPER_PHANTOM, 2, 1, 1);
+		FabricDefaultAttributeRegistry.register(MYSTERIOUS_WITCH, MysteriousWitch.createAttributes());
+		SpawnPlacements.register(MYSTERIOUS_WITCH, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MysteriousWitch::checkWitchSpawnRules);
+		// Rare: only dark forests, pale gardens and swamps, only at night / in the dark (zombies are weight 100).
+		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.DARK_FOREST, Biomes.PALE_GARDEN, Biomes.SWAMP, Biomes.MANGROVE_SWAMP),
+				MobCategory.MONSTER, MYSTERIOUS_WITCH, 4, 1, 1);
 	}
 }

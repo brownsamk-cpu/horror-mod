@@ -3,7 +3,7 @@
 	"id": "horrormod",
 	"version": "${version}",
 	"name": "Horror Mod",
-	"description": "Spooky-fun Halloween things, one step at a time. Step 1: the Ghost, a clear see-through ghost that floats around, says a soft \"wooo\", and never hurts anyone. Step 2: the Super Phantom, a big dark phantom with glowing eyes that swoops by and attacks at night and snatches one little item (it drops everything it took when defeated).",
+	"description": "Spooky-fun Halloween things, one step at a time. Step 1: the Ghost, a clear see-through ghost that floats around, says a soft \"wooo\", and never hurts anyone. Step 2: the Super Phantom, a big dark phantom with glowing eyes that swoops by and attacks at night and snatches one little item (it drops everything it took when defeated). Step 3: the Mysterious Witch, a neutral witch who throws her own new potions (Bouncy, Glow, Bat, Slime Feet) only at whoever hits her.",
 	"authors": [
 		"Sam Brown",
 		"Sam's daughter"
