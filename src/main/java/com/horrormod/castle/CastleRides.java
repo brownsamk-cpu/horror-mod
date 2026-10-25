@@ -26,7 +26,11 @@ import net.minecraft.world.phys.Vec3;
  */
 public final class CastleRides {
 	/** A ride from {@code from} to {@code to} taking {@code ticks}; {@code arc} = how high it bumps up in the middle. */
-	public record Ride(Vec3 from, Vec3 to, int ticks, double arc) {
+	public record Ride(Vec3 from, Vec3 to, int ticks, double arc, Vec3 anchor) {
+		public Ride(Vec3 from, Vec3 to, int ticks, double arc) {
+			this(from, to, ticks, arc, null);
+		}
+
 		Vec3 at(int tick) {
 			double t = Math.min(1.0, tick / (double) ticks);
 			return from.lerp(to, t).add(0, arc * 4 * t * (1 - t), 0);
@@ -48,6 +52,16 @@ public final class CastleRides {
 		ServerTickEvents.END_SERVER_TICK.register(CastleRides::tick);
 		// a stray's arrow hitting you on the Blast Pad doesn't hurt: it BLASTS you across the gap
 		ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
+			// Level 7 lava never hurts: it whooshes you back to the start pad instead
+			if (entity instanceof ServerPlayer player && (source.is(net.minecraft.world.damagesource.DamageTypes.LAVA)
+					|| source.is(net.minecraft.world.damagesource.DamageTypes.ON_FIRE) || source.is(net.minecraft.world.damagesource.DamageTypes.IN_FIRE))
+					&& LevelSevenRescue.inDanger(player, 3)) {
+				if (player.isInLava()) {
+					LevelSevenRescue.rescue(player);
+				}
+				player.clearFire();
+				return false;
+			}
 			if (entity instanceof ServerPlayer player && source.getDirectEntity() instanceof AbstractArrow && padUnder(player) != null) {
 				launchFromPad(player);
 				return false;
@@ -64,6 +78,12 @@ public final class CastleRides {
 		RIDES.put(player.getUUID(), ride);
 		RIDE_TICK.put(player.getUUID(), 0);
 		player.resetFallDistance();
+	}
+
+	/** Ends any ride right away (used when Level 7 whooshes you back to the start). */
+	public static void stop(ServerPlayer player) {
+		RIDES.remove(player.getUUID());
+		RIDE_TICK.remove(player.getUUID());
 	}
 
 	/** The Blast Pad under the player's feet, or null. */
@@ -156,6 +176,11 @@ public final class CastleRides {
 
 	private static void tickPlayer(ServerPlayer player) {
 		UUID id = player.getUUID();
+		// Level 7: falling into the rescue field (or touching the lava) sends you back to the start, never hurts
+		if (!player.isSpectator() && (LevelSevenRescue.inDanger(player, 0) || (player.isInLava() && LevelSevenRescue.inDanger(player, 3)))
+				&& LevelSevenRescue.rescue(player)) {
+			return;
+		}
 		Ride ride = RIDES.get(id);
 		if (ride != null) {
 			int t = RIDE_TICK.merge(id, 1, Integer::sum);
@@ -163,7 +188,16 @@ public final class CastleRides {
 			player.teleportTo(pos.x, pos.y, pos.z);
 			player.setDeltaMovement(Vec3.ZERO);
 			player.resetFallDistance();
-			if (t % 3 == 0) {
+			if (ride.anchor() != null) {
+				// the grappling hook's rope: a line of little white sparkles from you to the hook
+				ServerLevel sl = (ServerLevel) player.level();
+				Vec3 hand = pos.add(0, 1.1, 0);
+				double len = hand.distanceTo(ride.anchor());
+				for (double d = 0.5; d < len; d += 0.5) {
+					Vec3 q = hand.lerp(ride.anchor(), d / len);
+					sl.sendParticles(ParticleTypes.END_ROD, q.x, q.y, q.z, 1, 0, 0, 0, 0.0);
+				}
+			} else if (t % 3 == 0) {
 				((ServerLevel) player.level()).sendParticles(ParticleTypes.CLOUD, pos.x, pos.y + 1.0, pos.z, 1, 0.1, 0.1, 0.1, 0.0);
 			}
 			if (t >= ride.ticks()) {

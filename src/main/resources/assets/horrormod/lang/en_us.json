@@ -38,5 +38,14 @@
  "block.horrormod.level_seven_gate": "Level 7 Gate",
  "block.horrormod.level_seven_gate.locked": "Locked! You need the Level 7 Key.",
  "block.horrormod.level_seven_gate.opened": "The gate opens... on to Level 7!",
- "block.horrormod.stray_blast_pad": "Stray Blast Pad"
+ "block.horrormod.stray_blast_pad": "Stray Blast Pad",
+ "item.horrormod.castle_level_seven": "Castle Level 7",
+ "item.horrormod.castle_level_seven.built": "Castle Level 7 is ready! Ride the white Electra Cores across!",
+ "item.horrormod.grappling_hook": "Grappling Hook",
+ "item.horrormod.grappling_hook.too_far": "Look at a block closer than 20 blocks!",
+ "block.horrormod.electra_core": "Electra Core",
+ "block.horrormod.grapple_target": "Grapple Target",
+ "block.horrormod.level_seven_start": "Level 7 Start Pad",
+ "block.horrormod.level_seven_start.whoosh": "Whoosh! Back to the start. Try again!",
+ "block.horrormod.rescue_field": "Rescue Field"
 }

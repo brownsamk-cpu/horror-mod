@@ -39,6 +39,11 @@ public final class ModItems {
 				output.accept(CastleItems.LEVEL_SEVEN_KEY);
 				output.accept(CastleItems.LEVEL_SEVEN_GATE);
 				output.accept(CastleItems.STRAY_BLAST_PAD);
+				output.accept(CastleItems.CASTLE_LEVEL_SEVEN);
+				output.accept(CastleItems.GRAPPLING_HOOK);
+				output.accept(CastleItems.ELECTRA_CORE);
+				output.accept(CastleItems.GRAPPLE_TARGET);
+				output.accept(CastleItems.LEVEL_SEVEN_START);
 				output.accept(SPIRIT);
 				output.accept(SPOOKY_SPIRIT_SPAWN_EGG);
 				output.accept(SUPER_PHANTOM_SPAWN_EGG);

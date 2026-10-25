@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "horrormod:block/electra_core"
+    },
+    "facing=south": {
+      "model": "horrormod:block/electra_core"
+    },
+    "facing=east": {
+      "model": "horrormod:block/electra_core"
+    },
+    "facing=west": {
+      "model": "horrormod:block/electra_core"
+    }
+  }
+}

@@ -22,6 +22,14 @@ public final class CastleItems {
 	public static final Item LEVEL_SEVEN_GATE = blockItem(CastleBlocks.LEVEL_SEVEN_GATE);
 	public static final Item STRAY_BLAST_PAD = blockItem(CastleBlocks.STRAY_BLAST_PAD);
 
+	/** 0.7.0: use it and Castle Level 7 appears right in front of you (the gap goes down into the ground). */
+	public static final Item CASTLE_LEVEL_SEVEN = register("castle_level_seven", CastleLevelSevenItem::new, new Item.Properties().stacksTo(1).rarity(Rarity.RARE));
+	/** Look at a block up to 20 away and right-click: it pulls you there. */
+	public static final Item GRAPPLING_HOOK = register("grappling_hook", GrapplingHookItem::new, new Item.Properties().stacksTo(1));
+	public static final Item ELECTRA_CORE = blockItem(CastleBlocks.ELECTRA_CORE);
+	public static final Item GRAPPLE_TARGET = blockItem(CastleBlocks.GRAPPLE_TARGET);
+	public static final Item LEVEL_SEVEN_START = blockItem(CastleBlocks.LEVEL_SEVEN_START);
+
 	private CastleItems() {
 	}
 

@@ -18,6 +18,16 @@ public final class CastleBlocks {
 	public static final Block STRAY_BLAST_PAD = block("stray_blast_pad", StrayBlastPadBlock::new,
 			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(1.5F).sound(SoundType.STONE).lightLevel(s -> 7));
 
+	/** 0.7.0 Level 7: glowing white moving platform. */
+	public static final Block ELECTRA_CORE = block("electra_core", ElectraCoreBlock::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).strength(-1.0F, 3600000.0F).sound(SoundType.AMETHYST).lightLevel(s -> 15).noLootTable());
+	public static final Block GRAPPLE_TARGET = block("grapple_target", Block::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(-1.0F, 3600000.0F).sound(SoundType.METAL).lightLevel(s -> 6).noLootTable());
+	public static final Block LEVEL_SEVEN_START = block("level_seven_start", Block::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(-1.0F, 3600000.0F).sound(SoundType.STONE).lightLevel(s -> 10).noLootTable());
+	public static final Block RESCUE_FIELD = block("rescue_field", RescueFieldBlock::new,
+			BlockBehaviour.Properties.of().noCollision().noOcclusion().strength(-1.0F, 3600000.0F).noLootTable());
+
 	private CastleBlocks() {
 	}
 

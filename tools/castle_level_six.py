@@ -110,7 +110,7 @@ SIGNS = {  # "x,y,z": 4 lines
     "7,14,17": ["Stand on the", "Blast Pad!", "Strays will", "blast you over"],
     "8,14,25": ["Take the", "Zip Line Hook", "right-click by", "the chain!"],
     "8,14,39": ["Get the key,", "use it on", "the gate", "to go on!"],
-    "6,14,46": ["LEVEL 7", "", "coming soon!", ""],
+    "6,14,46": ["LEVEL 7", "is here! Use the", "Castle Level 7", "item!"],
 }
 data = {
     "name": "Castle Level 6",
