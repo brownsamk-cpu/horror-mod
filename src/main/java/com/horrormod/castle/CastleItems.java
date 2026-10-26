@@ -29,6 +29,7 @@ public final class CastleItems {
 	public static final Item ELECTRA_CORE = blockItem(CastleBlocks.ELECTRA_CORE);
 	public static final Item GRAPPLE_TARGET = blockItem(CastleBlocks.GRAPPLE_TARGET);
 	public static final Item LEVEL_SEVEN_START = blockItem(CastleBlocks.LEVEL_SEVEN_START);
+	public static final Item GO_UP_PAD = blockItem(CastleBlocks.GO_UP_PAD);
 
 	private CastleItems() {
 	}

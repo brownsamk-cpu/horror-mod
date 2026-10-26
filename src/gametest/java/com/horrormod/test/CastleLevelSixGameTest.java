@@ -58,7 +58,7 @@ public class CastleLevelSixGameTest {
 			}
 		} finally {
 			built.strays().forEach(Stray::discard);
-			for (BlockPos p : BlockPos.betweenClosed(CastleLevelSix.toWorld(origin, fwd, 0, 0, 0), CastleLevelSix.toWorld(origin, fwd, 12, 19, 49))) {
+			for (BlockPos p : BlockPos.betweenClosed(CastleLevelSix.toWorld(origin, fwd, 0, 0, 0), CastleLevelSix.toWorld(origin, fwd, 12, 20, 49))) {
 				level.setBlock(p, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE);
 			}
 		}

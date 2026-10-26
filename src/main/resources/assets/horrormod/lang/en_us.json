@@ -31,7 +31,7 @@
  "item.minecraft.tipped_arrow.effect.horrormod.slime_feet": "Arrow of Slime Feet",
  "itemGroup.horrormod.horror_mod": "Horror Mod",
  "item.horrormod.castle_level_six": "Castle Level 6",
- "item.horrormod.castle_level_six.built": "Castle Level 6 is ready! Go through the door and climb!",
+ "item.horrormod.castle_level_six.built": "Castle Levels 6 and 7 are ready! Climb Level 6, then go UP to Level 7!",
  "item.horrormod.zip_line_hook": "Zip Line Hook",
  "item.horrormod.zip_line_hook.too_far": "Get closer to the zip line rope (the chains)!",
  "item.horrormod.level_seven_key": "Level 7 Key",
@@ -47,5 +47,8 @@
  "block.horrormod.grapple_target": "Grapple Target",
  "block.horrormod.level_seven_start": "Level 7 Start Pad",
  "block.horrormod.level_seven_start.whoosh": "Whoosh! Back to the start. Try again!",
- "block.horrormod.rescue_field": "Rescue Field"
+ "block.horrormod.rescue_field": "Rescue Field",
+ "block.horrormod.go_up_pad": "Go Up Pad",
+ "block.horrormod.go_up_pad.whoosh": "Whoosh! Up to LEVEL 7!",
+ "block.horrormod.go_up_pad.none": "There's no Level 7 upstairs yet!"
 }

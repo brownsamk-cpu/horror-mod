@@ -82,6 +82,28 @@ draw("block/level_seven_start.png", {
     "gggggggggggggggg",
 ])
 
+# 0.7.1 Go Up Pad (in Level 6's last room): green pad with a big white arrow pointing UP
+draw("block/go_up_pad.png", {
+    "g": (30, 120, 60, 255), "G": (70, 200, 100, 255), "W": (255, 255, 255, 255),
+}, [
+    "gggggggggggggggg",
+    "gGGGGGGWWGGGGGGg",
+    "gGGGGGWWWWGGGGGg",
+    "gGGGGWWWWWWGGGGg",
+    "gGGGWWWWWWWWGGGg",
+    "gGGWWWWWWWWWWGGg",
+    "gGWWWWWWWWWWWWGg",
+    "gGGGGGWWWWGGGGGg",
+    "gGGGGGWWWWGGGGGg",
+    "gGGGGGWWWWGGGGGg",
+    "gGGGGGWWWWGGGGGg",
+    "gGGGGGWWWWGGGGGg",
+    "gGGGGGWWWWGGGGGg",
+    "gGGGGGWWWWGGGGGg",
+    "gGGGGGGGGGGGGGGg",
+    "gggggggggggggggg",
+])
+
 # Grappling Hook: a three-pronged iron hook with a rope
 draw("item/grappling_hook.png", {
     "o": (40, 40, 48, 255), "i": (170, 172, 182, 255), "I": (235, 236, 244, 255),

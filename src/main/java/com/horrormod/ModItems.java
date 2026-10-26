@@ -44,6 +44,7 @@ public final class ModItems {
 				output.accept(CastleItems.ELECTRA_CORE);
 				output.accept(CastleItems.GRAPPLE_TARGET);
 				output.accept(CastleItems.LEVEL_SEVEN_START);
+				output.accept(CastleItems.GO_UP_PAD);
 				output.accept(SPIRIT);
 				output.accept(SPOOKY_SPIRIT_SPAWN_EGG);
 				output.accept(SUPER_PHANTOM_SPAWN_EGG);

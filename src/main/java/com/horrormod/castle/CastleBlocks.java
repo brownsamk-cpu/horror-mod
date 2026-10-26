@@ -28,6 +28,10 @@ public final class CastleBlocks {
 	public static final Block RESCUE_FIELD = block("rescue_field", RescueFieldBlock::new,
 			BlockBehaviour.Properties.of().noCollision().noOcclusion().strength(-1.0F, 3600000.0F).noLootTable());
 
+	/** 0.7.1: in Level 6's last room; step on it and you whoosh up to Level 7's start pad (Level 7 is stacked on top). */
+	public static final Block GO_UP_PAD = block("go_up_pad", GoUpPadBlock::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(-1.0F, 3600000.0F).sound(SoundType.STONE).lightLevel(s -> 10).noLootTable());
+
 	private CastleBlocks() {
 	}
 

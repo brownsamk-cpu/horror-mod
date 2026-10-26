@@ -98,6 +98,7 @@ public final class CastleLevelSix {
 			case 'o' -> Blocks.DARK_OAK_SIGN.defaultBlockState().setValue(StandingSignBlock.ROTATION, 0);
 			case 'p' -> CastleBlocks.STRAY_BLAST_PAD.defaultBlockState().setValue(StrayBlastPadBlock.FACING, Direction.NORTH);
 			case 'g' -> CastleBlocks.LEVEL_SEVEN_GATE.defaultBlockState();
+			case 'U' -> CastleBlocks.GO_UP_PAD.defaultBlockState();
 			default -> Blocks.AIR.defaultBlockState();
 		};
 	}
@@ -121,6 +122,38 @@ public final class CastleLevelSix {
 	public static BlockPos originInFrontOf(BlockPos feet, Direction forward) {
 		Direction left = forward.getCounterClockWise();
 		return feet.relative(forward, 2).relative(left, width() / 2).below();
+	}
+
+	/** How high above Level 6's bottom Level 7's bottom goes when they're stacked (from the data). */
+	public static int levelSevenY() {
+		return data().getAsJsonObject("stack").get("level_seven_y").getAsInt();
+	}
+
+	/** Where Level 7's origin goes when it's stacked on a Level 6 built at {@code origin}. */
+	public static BlockPos levelSevenOrigin(BlockPos origin) {
+		return origin.above(levelSevenY());
+	}
+
+	public record Tower(Built six, CastleLevelSeven.Built seven) {
+	}
+
+	/** 0.7.1 (June): build Level 6 and stack Level 7 right on top of it, like one tall castle tower. */
+	public static Tower buildTower(ServerLevel level, BlockPos origin, Direction forward) {
+		Built six = build(level, origin, forward);
+		BlockPos o7 = levelSevenOrigin(origin);
+		CastleLevelSeven.Built seven = CastleLevelSeven.build(level, o7, forward);
+		Rotation rot = rotationFor(forward);
+		for (var e : data().getAsJsonObject("stack").getAsJsonArray("seal")) {
+			JsonArray b = e.getAsJsonArray();
+			for (int y = b.get(2).getAsInt(); y <= b.get(3).getAsInt(); y++) {
+				for (int z = b.get(4).getAsInt(); z <= b.get(5).getAsInt(); z++) {
+					for (int x = b.get(0).getAsInt(); x <= b.get(1).getAsInt(); x++) {
+						level.setBlock(toWorld(o7, forward, x, y, z), Blocks.STONE_BRICKS.defaultBlockState().rotate(rot), Block.UPDATE_CLIENTS);
+					}
+				}
+			}
+		}
+		return new Tower(six, seven);
 	}
 
 	public static Built build(ServerLevel level, BlockPos origin, Direction forward) {

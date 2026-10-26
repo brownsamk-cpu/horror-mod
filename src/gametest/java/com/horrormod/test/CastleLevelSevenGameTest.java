@@ -6,6 +6,8 @@ import com.horrormod.castle.CastleLevelSeven;
 import com.horrormod.castle.CastleLevelSix;
 import com.horrormod.castle.CastleRides;
 import com.horrormod.castle.ElectraCoreBlock;
+import com.horrormod.castle.GoUpPadBlock;
+import com.horrormod.castle.LevelSevenRescue;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -130,5 +132,50 @@ public class CastleLevelSevenGameTest {
 			helper.assertTrue(swimmer.getHealth() >= health && !swimmer.isOnFire(), "lava didn't hurt");
 			helper.assertTrue(faller.getInventory().contains(new ItemStack(CastleItems.GRAPPLING_HOOK)), "kept items");
 		});
+	}
+
+	/** 0.7.1 (June): the Castle Level 6 item stacks Level 7 right ON TOP of Level 6 (one tall tower), the Go Up Pad takes you up, and no cats. */
+	@GameTest(maxTicks = 60)
+	@SuppressWarnings("removal")
+	public void levelSevenStackedAboveLevelSix(GameTestHelper helper) {
+		ServerLevel level = helper.getLevel();
+		BlockPos origin = helper.absolutePos(new BlockPos(0, 1, 0)).above(60);
+		Direction fwd = Direction.EAST;
+		CastleLevelSix.Tower tower = CastleLevelSix.buildTower(level, origin, fwd);
+		BlockPos o7 = tower.seven().origin();
+		BlockPos top = CastleLevelSix.toWorld(origin, fwd, 12, CastleLevelSix.levelSevenY() + CastleLevelSeven.height() - 1, 49);
+		try {
+			helper.assertTrue(o7.getX() == origin.getX() && o7.getZ() == origin.getZ() && o7.getY() > origin.getY(), "Level 7 is directly above Level 6");
+			// Level 6's roof is solid, and Level 7's bottom (and its void + lava) sits above it
+			int roof = CastleLevelSix.levelSevenY() - 1;
+			for (int x = 0; x < 13; x++) {
+				for (int z = 0; z < 50; z++) {
+					helper.assertTrue(level.getBlockState(CastleLevelSix.toWorld(origin, fwd, x, roof, z)).isSolid(), "Level 6 roof is solid at " + x + "," + z);
+				}
+			}
+			BlockPos lava = CastleLevelSix.toWorld(o7, fwd, 2, 3, 10);
+			helper.assertTrue(level.getBlockState(lava).is(Blocks.LAVA) && lava.getY() > origin.getY() + roof, "Level 7 lava is above Level 6's roof");
+			helper.assertTrue(level.getBlockState(CastleLevelSix.toWorld(o7, fwd, 6, 0, 10)).is(CastleBlocks.RESCUE_FIELD), "Level 7 void still has its rescue field");
+			helper.assertTrue(tower.seven().start().getY() > CastleLevelSix.toWorld(origin, fwd, 6, 19, 46).getY(), "Level 7's start is above Level 6's top");
+			helper.assertTrue(level.getBlockState(CastleLevelSix.toWorld(o7, fwd, 6, CastleLevelSeven.floor() + 1, 0)).isSolid(), "Level 7's high-up door is bricked shut");
+			// the Go Up Pad in Level 6's last room whooshes you to Level 7's start pad
+			BlockPos pad = CastleLevelSix.toWorld(origin, fwd, 9, 13, 46);
+			helper.assertTrue(level.getBlockState(pad).is(CastleBlocks.GO_UP_PAD), "Go Up Pad in Level 6");
+			ServerPlayer player = helper.makeMockServerPlayerInLevel();
+			player.snapTo(pad.getX() + 0.5, pad.getY() + 1, pad.getZ() + 0.5, 0, 0);
+			helper.assertTrue(GoUpPadBlock.goUp(player, pad), "the pad finds Level 7 upstairs");
+			helper.assertTrue(player.blockPosition().equals(tower.seven().start()), "player is on Level 7's start pad, at " + player.blockPosition());
+			// falling in Level 7 sends you back to Level 7's start, never down into Level 6
+			BlockPos fall = CastleLevelSix.toWorld(o7, fwd, 6, 1, 12);
+			player.snapTo(fall.getX() + 0.5, fall.getY(), fall.getZ() + 0.5, 0, 0);
+			helper.assertTrue(LevelSevenRescue.rescue(player) && player.blockPosition().equals(tower.seven().start()), "rescue goes to Level 7's start");
+			helper.assertTrue(level.getEntitiesOfClass(Cat.class, AABB.encapsulatingFullBlocks(origin, top).inflate(4)).isEmpty(), "no cats in the tower!");
+		} finally {
+			for (BlockPos p : BlockPos.betweenClosed(origin, top)) {
+				level.setBlock(p, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE);
+			}
+			tower.six().strays().forEach(e -> e.discard());
+		}
+		helper.succeed();
 	}
 }
