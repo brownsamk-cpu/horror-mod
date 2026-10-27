@@ -50,5 +50,14 @@
  "block.horrormod.rescue_field": "Rescue Field",
  "block.horrormod.go_up_pad": "Go Up Pad",
  "block.horrormod.go_up_pad.whoosh": "Whoosh! Up to LEVEL 7!",
- "block.horrormod.go_up_pad.none": "There's no Level 7 upstairs yet!"
+ "block.horrormod.go_up_pad.none": "There's no Level 7 upstairs yet!",
+ "item.horrormod.castle_level_nine": "Castle Level 9",
+ "item.horrormod.castle_level_nine.built": "Castle Level 9 is ready! Find the 5 hidden buttons!",
+ "item.horrormod.level_ten_key": "Level 10 Key",
+ "block.horrormod.hidden_button": "Hidden Button",
+ "block.horrormod.hidden_button.found": "Button %s of %s found!",
+ "block.horrormod.hidden_button.again": "You already found this one! %s of %s found.",
+ "block.horrormod.hidden_button.all": "You found ALL the buttons! The secret door is open!",
+ "block.horrormod.puzzle_lamp": "Puzzle Lamp",
+ "block.horrormod.secret_door": "Secret Door"
 }

@@ -10,7 +10,8 @@
       "com.horrormod.test.SuperPhantomGameTest",
       "com.horrormod.test.MysteriousWitchGameTest",
       "com.horrormod.test.CastleLevelSixGameTest",
-      "com.horrormod.test.CastleLevelSevenGameTest"
+      "com.horrormod.test.CastleLevelSevenGameTest",
+      "com.horrormod.test.CastleLevelNineGameTest"
     ],
     "fabric-client-gametest": [
       "com.horrormod.test.SpookySpiritScreenshots",
@@ -18,7 +19,8 @@
       "com.horrormod.test.MysteriousWitchScreenshots",
       "com.horrormod.test.SpiritScreenshots",
       "com.horrormod.test.CastleScreenshots",
-      "com.horrormod.test.CastleLevelSevenScreenshots"
+      "com.horrormod.test.CastleLevelSevenScreenshots",
+      "com.horrormod.test.CastleLevelNineScreenshots"
     ]
   },
   "depends": {

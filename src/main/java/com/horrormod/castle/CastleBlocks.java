@@ -32,6 +32,15 @@ public final class CastleBlocks {
 	public static final Block GO_UP_PAD = block("go_up_pad", GoUpPadBlock::new,
 			BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(-1.0F, 3600000.0F).sound(SoundType.STONE).lightLevel(s -> 10).noLootTable());
 
+	/** 0.8.0 Level 9: hidden buttons, progress lamps, and the bookshelf-looking secret door. */
+	public static final Block HIDDEN_BUTTON = block("hidden_button", HiddenButtonBlock::new,
+			BlockBehaviour.Properties.of().noCollision().strength(-1.0F, 3600000.0F).sound(SoundType.WOOD).noLootTable());
+	public static final Block PUZZLE_LAMP = block("puzzle_lamp", PuzzleLampBlock::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(-1.0F, 3600000.0F).sound(SoundType.GLASS)
+					.lightLevel(s -> s.getValue(PuzzleLampBlock.LIT) ? 15 : 0).noLootTable());
+	public static final Block SECRET_DOOR = block("secret_door", Block::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(-1.0F, 3600000.0F).sound(SoundType.WOOD).noLootTable());
+
 	private CastleBlocks() {
 	}
 

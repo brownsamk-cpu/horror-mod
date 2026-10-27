@@ -1,0 +1,282 @@
+{
+ "name": "Castle Level 9",
+ "size": [
+  15,
+  9,
+  17
+ ],
+ "floor": 0,
+ "start": [
+  7,
+  1,
+  1
+ ],
+ "key": {
+  " ": "air",
+  "#": "stone bricks",
+  "d": "deepslate bricks",
+  "m": "mossy stone bricks",
+  "p": "oak planks",
+  "k": "bookshelf",
+  "r": "red carpet",
+  "h": "hay bale (cover)",
+  "L": "lantern",
+  "H": "ladder (on the left wall)",
+  "w": "spruce planks counter",
+  "f": "flower pot with a poppy",
+  "G": "gold block",
+  "C": "chest with the Level 10 Key",
+  "o": "sign",
+  "s": "secret door (looks like a bookshelf, opens when all 5 buttons are found)",
+  "1": "puzzle lamp 1",
+  "2": "puzzle lamp 2",
+  "3": "puzzle lamp 3",
+  "4": "puzzle lamp 4",
+  "5": "puzzle lamp 5",
+  "E": "hidden button on a left-side wall (faces right)",
+  "K": "hidden button on a right-side wall (faces left)",
+  "N": "hidden button on the back wall (faces you)",
+  "F": "hidden button on the floor"
+ },
+ "signs": {
+  "5,1,2": [
+   "Castle LEVEL 9",
+   "Find the 5",
+   "hidden buttons!",
+   "Look everywhere!"
+  ],
+  "6,1,14": [
+   "LEVEL 10",
+   "",
+   "coming soon!",
+   ""
+  ]
+ },
+ "painting": [
+  1,
+  2,
+  4
+ ],
+ "buttons": [
+  [
+   1,
+   2,
+   4,
+   "behind the painting on the left wall"
+  ],
+  [
+   10,
+   1,
+   6,
+   "peeking out at the edge of the red rug"
+  ],
+  [
+   12,
+   2,
+   6,
+   "on a bookshelf in the bookshelf wall (right side)"
+  ],
+  [
+   2,
+   5,
+   11,
+   "up the ladder, on the back wall of the little loft"
+  ],
+  [
+   11,
+   2,
+   11,
+   "behind the flower pot on the counter"
+  ]
+ ],
+ "skeletons": [
+  [
+   4,
+   1,
+   9
+  ],
+  [
+   11,
+   1,
+   5
+  ],
+  [
+   7,
+   1,
+   9
+  ]
+ ],
+ "layers": [
+  [
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "dddddGGGGGddddd",
+   "dddddGGGGGddddd",
+   "dddddGGGGGddddd",
+   "ddddddddddddddd"
+  ],
+  [
+   "######   ######",
+   "#L           L#",
+   "#    o        #",
+   "#         h  k#",
+   "m    rrrrr   k#",
+   "#    rrrrr   k#",
+   "#    rrrrrF  k#",
+   "#  h rrrrr   km",
+   "#    rrrrr   k#",
+   "#            k#",
+   "#H      h www #",
+   "#         www #",
+   "######sss######",
+   "mL           L#",
+   "#     o       #",
+   "#      C      #",
+   "##m##m##m##m##m"
+  ],
+  [
+   "######   ######",
+   "#             #",
+   "#             m",
+   "#         h  k#",
+   "#E           k#",
+   "#            k#",
+   "#           Kk#",
+   "#  h         k#",
+   "m            k#",
+   "#            k#",
+   "#H      h  f  #",
+   "#          N  m",
+   "######sss######",
+   "#             #",
+   "#             #",
+   "#             #",
+   "###############"
+  ],
+  [
+   "#m##m#   #m##m#",
+   "#             #",
+   "#             #",
+   "m            k#",
+   "#            k#",
+   "#            k#",
+   "#            km",
+   "#            k#",
+   "#            k#",
+   "#            k#",
+   "#H            #",
+   "#             #",
+   "m##m##sssm##m##",
+   "#             #",
+   "#             #",
+   "#             m",
+   "###############"
+  ],
+  [
+   "###############",
+   "#             m",
+   "#             #",
+   "#            k#",
+   "#            k#",
+   "#            k#",
+   "#            k#",
+   "m            k#",
+   "#            k#",
+   "#            k#",
+   "#H            m",
+   "#ppp          #",
+   "###############",
+   "#             #",
+   "#             #",
+   "#             #",
+   "m##m##m##m##m##"
+  ],
+  [
+   "###############",
+   "#             #",
+   "m             #",
+   "#             #",
+   "#             #",
+   "#             m",
+   "#             #",
+   "#             #",
+   "#             #",
+   "#             #",
+   "#             #",
+   "m NL          #",
+   "#####12345#####",
+   "#             #",
+   "#             m",
+   "#             #",
+   "###############"
+  ],
+  [
+   "##m##m##m##m##m",
+   "#             #",
+   "#             #",
+   "#             #",
+   "#             #",
+   "#             #",
+   "m             #",
+   "#             #",
+   "#             #",
+   "#             m",
+   "#             #",
+   "#             #",
+   "#m##m##m##m##m#",
+   "#             #",
+   "#             #",
+   "m             #",
+   "###############"
+  ],
+  [
+   "###############",
+   "m             #",
+   "#             #",
+   "#             #",
+   "#             m",
+   "#             #",
+   "#             #",
+   "#             #",
+   "#             #",
+   "#             #",
+   "m             #",
+   "#             #",
+   "###############",
+   "#             m",
+   "#             #",
+   "#             #",
+   "#m##m##m##m##m#"
+  ],
+  [
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd",
+   "ddddddddddddddd"
+  ]
+ ]
+}

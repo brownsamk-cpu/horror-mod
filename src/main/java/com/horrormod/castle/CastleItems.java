@@ -31,6 +31,11 @@ public final class CastleItems {
 	public static final Item LEVEL_SEVEN_START = blockItem(CastleBlocks.LEVEL_SEVEN_START);
 	public static final Item GO_UP_PAD = blockItem(CastleBlocks.GO_UP_PAD);
 
+	/** 0.8.0: use it and Castle Level 9 (the hidden-buttons puzzle) appears right in front of you. */
+	public static final Item CASTLE_LEVEL_NINE = register("castle_level_nine", CastleLevelNineItem::new, new Item.Properties().stacksTo(1).rarity(Rarity.RARE));
+	/** The prize in Level 9's secret room (for Level 10, coming soon!). */
+	public static final Item LEVEL_TEN_KEY = register("level_ten_key", Item::new, new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
+
 	private CastleItems() {
 	}
 
