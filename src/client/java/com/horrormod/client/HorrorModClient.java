@@ -22,6 +22,10 @@ public class HorrorModClient implements ClientModInitializer {
 		EntityRendererRegistry.register(ModEntities.SUPER_PHANTOM, SuperPhantomRenderer::new);
 		ModelLayerRegistry.registerModelLayer(MysteriousWitchModel.LAYER, MysteriousWitchModel::createBodyLayer);
 		EntityRendererRegistry.register(ModEntities.MYSTERIOUS_WITCH, MysteriousWitchRenderer::new);
+		// 0.9.0 Stony Cave: the Stone Monster and the rocks it throws
+		ModelLayerRegistry.registerModelLayer(StoneMonsterModel.LAYER, StoneMonsterModel::createBodyLayer);
+		EntityRendererRegistry.register(com.horrormod.cave.CaveEntities.STONE_MONSTER, StoneMonsterRenderer::new);
+		EntityRendererRegistry.register(com.horrormod.cave.CaveEntities.STONE_ROCK, ctx -> new net.minecraft.client.renderer.entity.ThrownItemRenderer<>(ctx, 1.5F, false));
 		ParticleProviderRegistry.getInstance().register(ModParticles.BAT, BatParticle.Provider::new);
 		// Bat Potion: a light spooky purple tint over the screen
 		HudElementRegistry.addFirst(HorrorMod.id("bat_tint"), (graphics, delta) -> {

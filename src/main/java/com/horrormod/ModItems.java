@@ -47,6 +47,10 @@ public final class ModItems {
 				output.accept(CastleItems.GO_UP_PAD);
 				output.accept(CastleItems.CASTLE_LEVEL_NINE);
 				output.accept(CastleItems.LEVEL_TEN_KEY);
+				output.accept(com.horrormod.cave.CaveItems.STONY_CAVE);
+				output.accept(com.horrormod.cave.CaveItems.STONE_KEY);
+				output.accept(com.horrormod.cave.CaveItems.STONE_DOOR);
+				output.accept(com.horrormod.cave.CaveItems.STONE_MONSTER_SPAWN_EGG);
 				output.accept(SPIRIT);
 				output.accept(SPOOKY_SPIRIT_SPAWN_EGG);
 				output.accept(SUPER_PHANTOM_SPAWN_EGG);
@@ -72,5 +76,6 @@ public final class ModItems {
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(output -> output.insertAfter(Items.VEX_SPAWN_EGG, SPOOKY_SPIRIT_SPAWN_EGG));
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(output -> output.insertAfter(Items.PHANTOM_SPAWN_EGG, SUPER_PHANTOM_SPAWN_EGG));
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(output -> output.insertAfter(Items.WITCH_SPAWN_EGG, MYSTERIOUS_WITCH_SPAWN_EGG));
+		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(output -> output.insertAfter(Items.IRON_GOLEM_SPAWN_EGG, com.horrormod.cave.CaveItems.STONE_MONSTER_SPAWN_EGG));
 	}
 }

@@ -18,6 +18,7 @@ public class HorrorMod implements ModInitializer {
 		MysteriousPotions.init();
 		ModEntities.init();
 		com.horrormod.castle.CastleItems.init();
+		com.horrormod.cave.CaveItems.init();
 		ModItems.init();
 	}
 }

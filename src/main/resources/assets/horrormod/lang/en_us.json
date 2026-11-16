@@ -59,5 +59,15 @@
  "block.horrormod.hidden_button.again": "You already found this one! %s of %s found.",
  "block.horrormod.hidden_button.all": "You found ALL the buttons! The secret door is open!",
  "block.horrormod.puzzle_lamp": "Puzzle Lamp",
- "block.horrormod.secret_door": "Secret Door"
+ "block.horrormod.secret_door": "Secret Door",
+ "entity.horrormod.stone_monster": "Stone Monster",
+ "entity.horrormod.stone_rock": "Stone Rock",
+ "item.horrormod.stone_monster_spawn_egg": "Stone Monster Spawn Egg",
+ "item.horrormod.stony_cave": "Stony Cave",
+ "item.horrormod.stony_cave.built": "The Stony Cave is ready! Beat the Stone Monster to get the Stone Key!",
+ "item.horrormod.stone_key": "Stone Key",
+ "item.horrormod.stone_rock": "Stone Rock",
+ "block.horrormod.stone_door": "Stone Door",
+ "block.horrormod.stone_door.locked": "Locked! You need the Stone Key.",
+ "block.horrormod.stone_door.opened": "The Stone Door rumbles open!"
 }
